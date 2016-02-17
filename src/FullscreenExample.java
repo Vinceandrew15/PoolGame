@@ -13,8 +13,9 @@ public class FullscreenExample {
     /** angle of quad rotation */
     float rotation = 0;
     
-    float angle= 0;
-  
+    float angle_x= 0;
+    float angle_y= 0;
+    
     /** time at last frame */
     long lastFrame;
   
@@ -56,11 +57,11 @@ public class FullscreenExample {
         // rotate quad
         rotation += 0.15f * delta;
   
-        if (Keyboard.isKeyDown(Keyboard.KEY_LEFT)) x -= 0.35f * delta;
-        if (Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) x += 0.35f * delta;
+        if (Keyboard.isKeyDown(Keyboard.KEY_LEFT)) angle_x -= 0.3f * delta;
+        if (Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) angle_x += 0.3f * delta;
   
-        if (Keyboard.isKeyDown(Keyboard.KEY_UP)) y -= 0.35f * delta;
-        if (Keyboard.isKeyDown(Keyboard.KEY_DOWN)) y += 0.35f * delta;
+        if (Keyboard.isKeyDown(Keyboard.KEY_UP)) angle_y -= 0.3f * delta;
+        if (Keyboard.isKeyDown(Keyboard.KEY_DOWN)) angle_y += 0.3f * delta;
   
         while (Keyboard.next()) {
             if (Keyboard.getEventKeyState()) {
@@ -74,12 +75,7 @@ public class FullscreenExample {
             }
         }
          
-        // keep quad on the screen
-        if (x < 0) x = 0;
-        if (x > 800) x = 800;
-        if (y < 0) y = 0;
-        if (y > 600) y = 600;
-  
+       
         updateFPS(); // update FPS Counter
     }
     
@@ -194,54 +190,104 @@ public class FullscreenExample {
         // Clear The Screen And The Depth Buffer
     	 GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
          // Clear the screen and depth buffer
+      GL11.glClearColor(1f,1f,1f,1f);
       GL11.glMatrixMode(GL11.GL_PROJECTION);
       GL11.glLoadIdentity();
       GL11.glOrtho(0, 800, 600, 0, 800, -600);
       GL11.glMatrixMode(GL11.GL_MODELVIEW);
+      //GL11.glEnable(GL11.GL_CULL_FACE);
+      GL11.glEnable(GL11.GL_DEPTH_TEST);
 
    
          
          GL11.glPushMatrix();
          GL11.glLoadIdentity();
+         GL11.glGetError();
          
-          GL11.glTranslatef(400,300,0.0f);
-         GL11.glRotatef(angle, 0.0f, 0.5f, 0.0f);
-         GL11.glRotatef(50, 0.0f, 0.0f, 1.0f);
+         GL11.glTranslatef(400,300,0.0f);
+         GL11.glRotatef(angle_x,1f,0.0f, 1.0f);
+         GL11.glRotatef(angle_y,0.0f,1.0f, 1.0f);
+         //GL11.glRotatef(50, 0.0f, 0.0f, 1.0f);
          GL11.glScalef(100,100,100);
+         
+         
          
          GL11.glBegin(GL11.GL_QUAD_STRIP);
           {
-          //this Makes a box that has no top or bottom. 
-          //Front - Orange
-          //Right - White
-          //Back - Blue
-          //Left - Teal
-          
-          GL11.glColor4f(1.0f,0.5f,0.0f,1.0f); 
-          GL11.glVertex3f(0.0f,1.0f,0.0f); //Front Bottom Left
-          GL11.glVertex3f(0.0f,0.0f,0.0f); //Front Top Left
-          GL11.glVertex3f(1.0f,1.0f,0.0f); //Front Bottom Right
-          GL11.glVertex3f(1.0f,0.0f,0.0f); //Front Top Right
-          
-          GL11.glColor4f(1.0f,1.0f,1.0f,1.0f);
-          GL11.glVertex3f(1.0f,1.0f,1.0f); //Right Bottom Back
-          GL11.glVertex3f(1.0f,0.0f,1.0f); //Right Top Back
-
-
-          GL11.glColor4f(0.0f,0.0f,1.0f,1.0f);
-          GL11.glVertex3f(0.0f,1.0f,1.0f); //Back left Bottom
-          GL11.glVertex3f(0.0f,0.0f,1.0f); //Back Left Top
-          
-
-          GL11.glColor4f(0.0f,1.0f,1.0f,1.0f);
-          GL11.glVertex3f(0.0f,1.0f,0.0f); //Front Bottom Left
-          GL11.glVertex3f(0.0f,0.0f,0.0f); //Front Top Left
+        	  GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
+              GL11.glLoadIdentity();
+              GL11.glTranslatef(-1.5f, 0.0f, -6.0f);
+           
+              GL11.glBegin(GL11.GL_TRIANGLES);        // Drawing Using Triangles
+              GL11.glColor3f(1.0f, 0.0f, 0.0f);     // Red
+              GL11.glVertex3f(0.0f, 1.0f, 0.0f);    // Top Of Triangle (Front)
+              GL11.glColor3f(0.0f, 1.0f, 0.0f);     // Green
+              GL11.glVertex3f(-1.0f, -1.0f, 1.0f);  // Left Of Triangle (Front)
+              GL11.glColor3f(0.0f, 0.0f, 1.0f);     // Blue
+              GL11.glVertex3f(1.0f, -1.0f, 1.0f);   // Right Of Triangle (Front)
+              GL11.glColor3f(1.0f, 0.0f, 0.0f);     // Red
+              GL11.glVertex3f(0.0f, 1.0f, 0.0f);    // Top Of Triangle (Right)
+              GL11.glColor3f(0.0f, 0.0f, 1.0f);     // Blue
+              GL11.glVertex3f(1.0f, -1.0f, 1.0f);   // Left Of Triangle (Right)
+              GL11.glColor3f(0.0f, 1.0f, 0.0f);     // Green
+              GL11.glVertex3f(1.0f, -1.0f, -1.0f);  // Right Of Triangle (Right)
+              GL11.glColor3f(1.0f, 0.0f, 0.0f);     // Red
+              GL11.glVertex3f(0.0f, 1.0f, 0.0f);    // Top Of Triangle (Back)
+              GL11.glColor3f(0.0f, 1.0f, 0.0f);     // Green
+              GL11.glVertex3f(1.0f, -1.0f, -1.0f);  // Left Of Triangle (Back)
+              GL11.glColor3f(0.0f, 0.0f, 1.0f);     // Blue
+              GL11.glVertex3f(-1.0f, -1.0f, -1.0f); // Right Of Triangle (Back)
+              GL11.glColor3f(1.0f, 0.0f, 0.0f);     // Red
+              GL11.glVertex3f(0.0f, 1.0f, 0.0f);    // Top Of Triangle (Left)
+              GL11.glColor3f(0.0f, 0.0f, 1.0f);     // Blue
+              GL11.glVertex3f(-1.0f, -1.0f, -1.0f); // Left Of Triangle (Left)
+              GL11.glColor3f(0.0f, 1.0f, 0.0f);     // Green
+              GL11.glVertex3f(-1.0f, -1.0f, 1.0f);  // Right Of Triangle (Left)
+              GL11.glEnd();                         // Finished Drawing The Triangle
+              GL11.glLoadIdentity();
+              GL11.glTranslatef(1.5f, 0.0f, -6.0f);
+              GL11.glBegin(GL11.GL_QUADS);            // Draw A Quad
+              GL11.glColor3f(0.0f, 1.0f, 0.0f);     // Set The Color To Green
+              GL11.glVertex3f(1.0f, 1.0f, -1.0f);   // Top Right Of The Quad (Top)
+              GL11.glVertex3f(-1.0f, 1.0f, -1.0f);  // Top Left Of The Quad (Top)
+              GL11.glVertex3f(-1.0f, 1.0f, 1.0f);   // Bottom Left Of The Quad (Top)
+              GL11.glVertex3f(1.0f, 1.0f, 1.0f);    // Bottom Right Of The Quad (Top)
+       
+              GL11.glColor3f(1.0f, 0.5f, 0.0f);     // Set The Color To Orange
+              GL11.glVertex3f(1.0f, -1.0f, 1.0f);   // Top Right Of The Quad (Bottom)
+              GL11.glVertex3f(-1.0f, -1.0f, 1.0f);  // Top Left Of The Quad (Bottom)
+              GL11.glVertex3f(-1.0f, -1.0f, -1.0f); // Bottom Left Of The Quad (Bottom)
+              GL11.glVertex3f(1.0f, -1.0f, -1.0f);  // Bottom Right Of The Quad (Bottom)
+       
+              GL11.glColor3f(1.0f, 0.0f, 0.0f);     // Set The Color To Red
+              GL11.glVertex3f(1.0f, 1.0f, 1.0f);    // Top Right Of The Quad (Front)
+              GL11.glVertex3f(-1.0f, 1.0f, 1.0f);   // Top Left Of The Quad (Front)
+              GL11.glVertex3f(-1.0f, -1.0f, 1.0f);  // Bottom Left Of The Quad (Front)
+              GL11.glVertex3f(1.0f, -1.0f, 1.0f);   // Bottom Right Of The Quad (Front)
+       
+              GL11.glColor3f(1.0f, 1.0f, 0.0f);     // Set The Color To Yellow
+              GL11.glVertex3f(1.0f, -1.0f, -1.0f);  // Bottom Left Of The Quad (Back)
+              GL11.glVertex3f(-1.0f, -1.0f, -1.0f); // Bottom Right Of The Quad (Back)
+              GL11.glVertex3f(-1.0f, 1.0f, -1.0f);  // Top Right Of The Quad (Back)
+              GL11.glVertex3f(1.0f, 1.0f, -1.0f);   // Top Left Of The Quad (Back)
+       
+              GL11.glColor3f(0.0f, 0.0f, 1.0f);     // Set The Color To Blue
+              GL11.glVertex3f(-1.0f, 1.0f, 1.0f);   // Top Right Of The Quad (Left)
+              GL11.glVertex3f(-1.0f, 1.0f, -1.0f);  // Top Left Of The Quad (Left)
+              GL11.glVertex3f(-1.0f, -1.0f, -1.0f); // Bottom Left Of The Quad (Left)
+              GL11.glVertex3f(-1.0f, -1.0f, 1.0f);  // Bottom Right Of The Quad (Left)
+       
+              GL11.glColor3f(1.0f, 0.0f, 1.0f);     // Set The Color To Violet
+              GL11.glVertex3f(1.0f, 1.0f, -1.0f);   // Top Right Of The Quad (Right)
+              GL11.glVertex3f(1.0f, 1.0f, 1.0f);    // Top Left Of The Quad (Right)
+              GL11.glVertex3f(1.0f, -1.0f, 1.0f);   // Bottom Left Of The Quad (Right)
+              GL11.glVertex3f(1.0f, -1.0f, -1.0f);  // Bottom Right Of The Quad (Right)
           
           }
           GL11.glEnd(); 
          GL11.glPopMatrix();
-         angle +=0.5f;
-         System.out.println(angle);
+         
+         
     }
   
     public static void main(String[] argv) {
