@@ -15,6 +15,7 @@ public class FullscreenExample {
     
     float angle_x= 0;
     float angle_y= 0;
+    float angle_z= 0;
     
     /** time at last frame */
     long lastFrame;
@@ -62,6 +63,9 @@ public class FullscreenExample {
   
         if (Keyboard.isKeyDown(Keyboard.KEY_UP)) angle_y -= 0.3f * delta;
         if (Keyboard.isKeyDown(Keyboard.KEY_DOWN)) angle_y += 0.3f * delta;
+        
+        if (Keyboard.isKeyDown(Keyboard.KEY_Q)) angle_z -= 0.3f * delta;
+        if (Keyboard.isKeyDown(Keyboard.KEY_A)) angle_z += 0.3f * delta;
   
         while (Keyboard.next()) {
             if (Keyboard.getEventKeyState()) {
@@ -207,16 +211,19 @@ public class FullscreenExample {
          GL11.glTranslatef(400,300,0.0f);
          GL11.glRotatef(angle_y,1.0f,0.0f,0f);
          GL11.glRotatef(angle_x,0f,1.0f,0f);
+         GL11.glRotatef(angle_z,0f,0.0f,1.0f);
          //GL11.glRotatef(50, 0.0f, 0.0f, 1.0f);
          GL11.glScalef(100,100,100);
+         
+         //GL11.glTranslatef(2f, 1.0f, 1.0f);
          
          
          
          GL11.glBegin(GL11.GL_QUAD_STRIP);
           {
         	  GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
-              GL11.glLoadIdentity();
-              //GL11.glTranslatef(angle_x, 0.0f, -6.0f);
+              //GL11.glLoadIdentity();
+              
            
               GL11.glBegin(GL11.GL_TRIANGLES);        // Drawing Using Triangles
               GL11.glColor3f(1.0f, 0.0f, 0.0f);     // Red
@@ -244,7 +251,7 @@ public class FullscreenExample {
               GL11.glColor3f(0.0f, 1.0f, 0.0f);     // Green
               GL11.glVertex3f(-1.0f, -1.0f, 1.0f);  // Right Of Triangle (Left)
               GL11.glEnd();                         // Finished Drawing The Triangle
-              GL11.glLoadIdentity();
+              //GL11.glLoadIdentity();
               //GL11.glTranslatef(1.5f, 0.0f, -6.0f);
               GL11.glBegin(GL11.GL_QUADS);            // Draw A Quad
               GL11.glColor3f(0.0f, 1.0f, 0.0f);     // Set The Color To Green
