@@ -9,13 +9,13 @@ import org.lwjgl.opengl.GL11;
 public class FullscreenExample {
   
     /** position of quad */
-    float x = 400, y = 300;
+    float x = 0, y = 0;
     /** angle of quad rotation */
     float rotation = 0;
     
     float angle_x= 0;
     float angle_y= 0;
-    float angle_z= 0;
+   
     
     /** time at last frame */
     long lastFrame;
@@ -64,8 +64,8 @@ public class FullscreenExample {
         if (Keyboard.isKeyDown(Keyboard.KEY_UP)) angle_y -= 0.3f * delta;
         if (Keyboard.isKeyDown(Keyboard.KEY_DOWN)) angle_y += 0.3f * delta;
         
-        if (Keyboard.isKeyDown(Keyboard.KEY_Q)) angle_z -= 0.3f * delta;
-        if (Keyboard.isKeyDown(Keyboard.KEY_A)) angle_z += 0.3f * delta;
+        if (Keyboard.isKeyDown(Keyboard.KEY_Q)) x -= 0.01f * delta;
+        if (Keyboard.isKeyDown(Keyboard.KEY_A)) x += 0.01f * delta;
   
         while (Keyboard.next()) {
             if (Keyboard.getEventKeyState()) {
@@ -211,11 +211,11 @@ public class FullscreenExample {
          GL11.glTranslatef(400,300,0.0f);
          GL11.glRotatef(angle_y,1.0f,0.0f,0f);
          GL11.glRotatef(angle_x,0f,1.0f,0f);
-         GL11.glRotatef(angle_z,0f,0.0f,1.0f);
+         
          //GL11.glRotatef(50, 0.0f, 0.0f, 1.0f);
          GL11.glScalef(100,100,100);
          
-         //GL11.glTranslatef(2f, 1.0f, 1.0f);
+         GL11.glTranslatef(x, 0.0f, 0.0f);
          
          
          
