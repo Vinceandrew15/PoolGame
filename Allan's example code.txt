@@ -1,0 +1,30 @@
+ 2 cubes you do...  
+ // Reset transforms
+  glLoadIdentity();
+// Cube 1
+pushMatrix();
+  gltransforms here
+  draw here
+popMatrix()
+// cube 2
+pushMatrix();
+  gltransforms here
+  draw here
+popMatrix()
+
+ what u do is
+// Clear screen
+  glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+  // Reset transforms
+  glLoadIdentity();
+ at the start of the draw loop and thats resets camera, 
+THEN if you wanna draw a cube somewhere you do 
+pushMatrix();
+  gltransforms here
+  draw here
+popMatrix()
+
+next thing
+keep transforms in matrix popping
