@@ -4,10 +4,10 @@ public class Ball {
 	
 	float x;
 	float y;
-	double x_vector=1;
-	double y_vector=1;
+	float x_vector=20f;
+	float y_vector=3f;
 	int ball_id;
-	double friction = 0.01;
+	float friction = 0.1f;
 	
 	public Ball(int newX, int newY, int new_ball_id){
 		x = newX;
@@ -38,14 +38,25 @@ public class Ball {
 	public void draw(){
 		drawEllipse((int)x,(int)y,12,12,0,0,0,0);
 	}
-	public void update(){
+	public void update(int delta){
 		x+=x_vector;
 		y+=y_vector;
-		if(x_vector>0)x_vector-=friction;
-		if(x_vector<0)x_vector+=friction;
-		if(y_vector>0)y_vector-=friction;
-		if(y_vector<0)y_vector+=friction;
+		if(x_vector<0.1f && x_vector>-0.1f)x_vector=0;
+		if(y_vector<0.1f && y_vector>-0.1f)y_vector=0;
+		if(x_vector>0.0f)x_vector-=friction;
+		if(x_vector<0.0f)x_vector+=friction;
+		if(y_vector>0.0)y_vector-=friction;
+		if(y_vector<0.0f)y_vector+=friction;
 		
+		if(x>850){
+			x=849;
+			x_vector=-x_vector;
+			x_vector=x_vector/1.2f;
+		}
+		if(x<50){
+			x=51;
+			x_vector=-x_vector;
+		}
 		
 	}
 
