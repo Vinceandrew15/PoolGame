@@ -51,9 +51,19 @@ public class FullscreenExample {
     while (!Display.isCloseRequested()) {
         // Clear the screen and depth buffer
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);  
-         
+        
+        drawRect(25,25,850,450,0.5f,0.2f,0.1f,0.0f);
         drawRect(50,50,800,400,0f,1f,0.2f,0.0f);
-        drawEllipse(400,200,50,300,1f,1f,0f,0.0f);
+        
+        drawEllipse(50,50,15,15,0f,0f,0f,0.0f);
+        drawEllipse(450,50,15,15,0f,0f,0f,0.0f);
+        drawEllipse(850,50,15,15,0f,0f,0f,0.0f);
+        
+        drawEllipse(50,450,15,15,0f,0f,0f,0.0f);
+        drawEllipse(450,450,15,15,0f,0f,0f,0.0f);
+        drawEllipse(850,450,15,15,0f,0f,0f,0.0f);
+        
+        
         
         Display.update();
     }
