@@ -8,11 +8,13 @@ public class Ball {
 	float y_vector=3f;
 	int ball_id;
 	float friction = 0.1f;
+	int radius;
 	
-	public Ball(int newX, int newY, int new_ball_id){
+	public Ball(int newX, int newY, int new_ball_id, int newRadius){
 		x = newX;
 		y = newY;
 		ball_id = new_ball_id;
+		radius = newRadius;
 	}
 	
 
@@ -36,7 +38,7 @@ public class Ball {
 	
 	
 	public void draw(){
-		drawEllipse((int)x,(int)y,12,12,0,0,0,0);
+		drawEllipse((int)x,(int)y,radius,radius,0,0,0,0);
 	}
 	public void update(int delta){
 		x+=x_vector;
@@ -47,11 +49,10 @@ public class Ball {
 		if(x_vector<0.0f)x_vector+=friction;
 		if(y_vector>0.0)y_vector-=friction;
 		if(y_vector<0.0f)y_vector+=friction;
-		
 		if(x>850){
 			x=849;
 			x_vector=-x_vector;
-			x_vector=x_vector/1.2f;
+			x_vector=x_vector/1.5f;
 		}
 		if(x<50){
 			x=51;
