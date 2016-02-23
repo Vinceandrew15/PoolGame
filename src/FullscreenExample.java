@@ -63,7 +63,9 @@ public class FullscreenExample {
         drawEllipse(450,450,15,15,0f,0f,0f,0.0f);
         drawEllipse(850,450,15,15,0f,0f,0f,0.0f);
         
+        Ball eightball = new Ball(300,200,0);
         
+        eightball.draw();
         
         Display.update();
     }
