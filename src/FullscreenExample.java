@@ -2,9 +2,66 @@ import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.LWJGLException;
+import org.lwjgl.Sys;
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.Display;
+import org.lwjgl.opengl.DisplayMode;
+import org.lwjgl.opengl.GL11;
   
 public class FullscreenExample {
-  
+	
+	 /** time at last frame */
+    long lastFrame;
+     
+    /** frames per second */
+    int fps;
+    /** last fps time */
+    long lastFPS;
+	
+    
+    
+    public void updateFPS() {
+        if (getTime() - lastFPS > 1000) {
+            Display.setTitle("FPS: " + fps);
+            fps = 0;
+             lastFPS += 1000;
+          }
+          fps++;
+     }
+    public int getDelta() {
+        long time = getTime();
+        int delta = (int) (time - lastFrame);
+        lastFrame = time;
+      
+        return delta;
+    }
+     
+    /**
+     * Get the accurate system time
+     * 
+     * @return The system time in milliseconds
+     */
+    public long getTime() {
+        return (Sys.getTime() * 1000) / Sys.getTimerResolution();
+    }
+           
+    public void update(int delta) {
+        // rotate quad
+
+         /*
+        if (Keyboard.isKeyDown(Keyboard.KEY_LEFT)) x -= 0.35f * delta;
+        if (Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) x += 0.35f * delta;
+         
+        if (Keyboard.isKeyDown(Keyboard.KEY_UP)) y -= 0.35f * delta;
+        if (Keyboard.isKeyDown(Keyboard.KEY_DOWN)) y += 0.35f * delta;
+         
+      */
+         
+        updateFPS(); // update FPS Counter
+    }
+     
+    
 	public static void drawEllipse(int newX, int newY, float xradius, float yradius, float r, float g, float b, float a )
 	{
 		GL11.glColor4f(r,g,b,a);

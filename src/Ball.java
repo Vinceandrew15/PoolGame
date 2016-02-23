@@ -34,6 +34,7 @@ public class Ball {
 		GL11.glPopMatrix();
 	}
 	
+	
 	public void draw(){
 		drawEllipse((int)x,(int)y,12,12,0,0,0,0);
 	}
