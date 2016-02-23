@@ -20,7 +20,12 @@ public class Ball {
 	public void addImpulse(float newX, float newY){
 		x_vector+=newX;
 		y_vector+=newY;
-		System.out.println("impulse added");
+	}
+	public float getX(){
+		return x;
+	}
+	public float getY(){
+		return y;
 	}
 	
 	public void drawEllipse(int newX, int newY, float xradius, float yradius, float r, float g, float b, float a )

@@ -2,16 +2,19 @@ import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.LWJGLException;
 import org.lwjgl.Sys;
 import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.Display;
-import org.lwjgl.opengl.DisplayMode;
-import org.lwjgl.opengl.GL11;
+import org.lwjgl.input.Mouse;
+
   
 public class FullscreenExample {
 	
 	int hello;
+	int mouse_x;
+	int mouse_y;
+	
+	float angle_radians;
+	float angle_degrees;
 	
 	 /** time at last frame */
     long lastFrame;
@@ -21,7 +24,10 @@ public class FullscreenExample {
     /** last fps time */
     long lastFPS;
     
-    Ball eightball = new Ball(300,200,0,12);;
+    Ball eightball;
+    Table standardTable;
+    
+    int game_state;
 	
     
     
@@ -49,11 +55,35 @@ public class FullscreenExample {
     public long getTime() {
         return (Sys.getTime() * 1000) / Sys.getTimerResolution();
     }
-           
-    public void update(int delta) {
-        // rotate quad
+    
+    public static float find_angle(float x_1, float y_1, float x_2, float y_2){
+        float tan_1;
+        float tan_2;
 
-         
+        tan_1=y_1-y_2;
+        tan_2=x_1-x_2;
+
+        return (float)Math.atan2(tan_1,tan_2);
+    }
+
+    
+    public void update(int delta) {
+       
+    	mouse_x = Mouse.getX(); // will return the X coordinate on the Display.
+    	mouse_y = Mouse.getY(); // will return the Y coordinate on the Display.
+        
+    	float point_y = eightball.getY();
+    	float point_x = eightball.getX();
+    	
+    	angle_radians = find_angle(point_x,point_y,mouse_x,mouse_y);
+    	angle_degrees=(angle_radians*57.2957795f);
+    	standardTable.setMouseAngle(angle_degrees+90);
+    	
+    	standardTable.setCueballLocation(point_x, point_y); 
+    	
+        if (Keyboard.isKeyDown(Keyboard.KEY_SPACE))eightball.addImpulse((float)Math.cos(angle_radians),(float)Math.sin(angle_radians));
+
+    	
         if (Keyboard.isKeyDown(Keyboard.KEY_UP))eightball.addImpulse(0f,0.3f);
         if (Keyboard.isKeyDown(Keyboard.KEY_DOWN))eightball.addImpulse(0f,-0.3f);
         if (Keyboard.isKeyDown(Keyboard.KEY_LEFT))eightball.addImpulse(-0.3f,0f);
@@ -81,8 +111,10 @@ public class FullscreenExample {
         
         lastFPS = getTime();
         
+        eightball = new Ball(300,200,0,12);
+        standardTable = new Table(0,0,800,400,25,15);
         
-        Table standardTable = new Table(0,0,800,400,25,15);
+        
         
         // init OpenGL
         GL11.glMatrixMode(GL11.GL_PROJECTION);
