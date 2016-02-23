@@ -34,6 +34,7 @@ public class FullscreenExample {
     }
 	
     public void start() {
+    	Ball eightball = new Ball(300,200,0);
         try {
         Display.setDisplayMode(new DisplayMode(900,500));
         Display.create();
@@ -63,9 +64,10 @@ public class FullscreenExample {
         drawEllipse(450,450,15,15,0f,0f,0f,0.0f);
         drawEllipse(850,450,15,15,0f,0f,0f,0.0f);
         
-        Ball eightball = new Ball(300,200,0);
+        
         
         eightball.draw();
+        eightball.update();
         
         Display.update();
     }
