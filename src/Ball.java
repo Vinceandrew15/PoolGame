@@ -4,10 +4,10 @@ public class Ball {
 	
 	float x;
 	float y;
-	float x_vector=20f;
-	float y_vector=3f;
+	float x_vector=-10f;
+	float y_vector=10f;
 	int ball_id;
-	float friction = 0.1f;
+	float friction = 1.01f;
 	int radius;
 	
 	public Ball(int newX, int newY, int new_ball_id, int newRadius){
@@ -17,7 +17,12 @@ public class Ball {
 		radius = newRadius;
 	}
 	
-
+	public void addImpulse(float newX, float newY){
+		x_vector+=newX;
+		y_vector+=newY;
+		System.out.println("impulse added");
+	}
+	
 	public void drawEllipse(int newX, int newY, float xradius, float yradius, float r, float g, float b, float a )
 	{
 		GL11.glColor4f(r,g,b,a);
@@ -32,7 +37,6 @@ public class Ball {
 		    GL11.glVertex2f((float)Math.cos(angle), (float)Math.sin(angle));
 		}
 		GL11.glEnd();
-
 		GL11.glPopMatrix();
 	}
 	
@@ -45,19 +49,34 @@ public class Ball {
 		y+=y_vector;
 		if(x_vector<0.1f && x_vector>-0.1f)x_vector=0;
 		if(y_vector<0.1f && y_vector>-0.1f)y_vector=0;
-		if(x_vector>0.0f)x_vector-=friction;
-		if(x_vector<0.0f)x_vector+=friction;
-		if(y_vector>0.0)y_vector-=friction;
-		if(y_vector<0.0f)y_vector+=friction;
-		if(x>850){
-			x=849;
+		if(x_vector>0.0f)x_vector/=friction;
+		if(x_vector<0.0f)x_vector/=friction;
+		if(y_vector>0.0)y_vector/=friction;
+		if(y_vector<0.0f)y_vector/=friction;
+		
+		if(x+radius>850){
+			x=849-radius;
 			x_vector=-x_vector;
-			x_vector=x_vector/1.5f;
+			//x_vector=x_vector/1.5f;
 		}
-		if(x<50){
-			x=51;
+		if(x-radius<50){
+			x=51+radius;
 			x_vector=-x_vector;
 		}
+		
+		
+		if(y+radius>450){
+			y=449-radius;
+			y_vector=-y_vector;
+			//x_vector=x_vector/1.5f;
+		}
+		if(y-radius<50){
+			y=51+radius;
+			y_vector=-y_vector;
+			
+		}
+		
+		
 		
 	}
 

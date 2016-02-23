@@ -20,6 +20,8 @@ public class FullscreenExample {
     int fps;
     /** last fps time */
     long lastFPS;
+    
+    Ball eightball = new Ball(300,200,0,12);;
 	
     
     
@@ -51,14 +53,16 @@ public class FullscreenExample {
     public void update(int delta) {
         // rotate quad
 
-         /*
-        if (Keyboard.isKeyDown(Keyboard.KEY_LEFT)) x -= 0.35f * delta;
-        if (Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) x += 0.35f * delta;
          
-        if (Keyboard.isKeyDown(Keyboard.KEY_UP)) y -= 0.35f * delta;
-        if (Keyboard.isKeyDown(Keyboard.KEY_DOWN)) y += 0.35f * delta;
+        if (Keyboard.isKeyDown(Keyboard.KEY_UP))eightball.addImpulse(0f,0.3f);
+        if (Keyboard.isKeyDown(Keyboard.KEY_DOWN))eightball.addImpulse(0f,-0.3f);
+        if (Keyboard.isKeyDown(Keyboard.KEY_LEFT))eightball.addImpulse(-0.3f,0f);
+        if (Keyboard.isKeyDown(Keyboard.KEY_RIGHT))eightball.addImpulse(0.3f,0f);
+
+
+    
          
-      */
+     
          
         updateFPS(); // update FPS Counter
     }
@@ -77,7 +81,7 @@ public class FullscreenExample {
         
         lastFPS = getTime();
         
-        Ball eightball = new Ball(300,200,0,12);
+        
         Table standardTable = new Table(0,0,800,400,25,15);
         
         // init OpenGL
@@ -100,7 +104,8 @@ public class FullscreenExample {
             eightball.draw();
             eightball.update(delta);
            
-
+            
+            update(delta);
             
             Display.update();
             Display.sync(60);
