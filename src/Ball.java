@@ -2,13 +2,19 @@ import org.lwjgl.opengl.GL11;
 
 public class Ball {
 	
+	
+	
 	float x;
 	float y;
-	float x_vector=-10f;
-	float y_vector=10f;
+	float x_vector=0f;
+	float y_vector=0f;
 	int ball_id;
-	float friction = 1.01f;
+	float friction = 1.02f;
 	int radius;
+	
+	boolean is_x_moving;
+	boolean is_y_moving;
+	boolean is_moving;
 	
 	public Ball(int newX, int newY, int new_ball_id, int newRadius){
 		x = newX;
@@ -26,6 +32,9 @@ public class Ball {
 	}
 	public float getY(){
 		return y;
+	}
+	public boolean getIsMoving(){
+		return is_moving;
 	}
 	
 	public void drawEllipse(int newX, int newY, float xradius, float yradius, float r, float g, float b, float a )
@@ -52,8 +61,23 @@ public class Ball {
 	public void update(int delta){
 		x+=x_vector;
 		y+=y_vector;
-		if(x_vector<0.1f && x_vector>-0.1f)x_vector=0;
-		if(y_vector<0.1f && y_vector>-0.1f)y_vector=0;
+		
+		
+		is_moving=true;
+		if(x_vector<0.1f && x_vector>-0.1f){
+			x_vector=0;
+			is_x_moving=false;
+		}else{
+			is_x_moving=true;
+		}
+		if(y_vector<0.1f && y_vector>-0.1f){
+			y_vector=0;
+			is_y_moving=false;
+		}else{
+			is_y_moving=true;
+		}
+		if(!is_x_moving && !is_y_moving)is_moving=false;
+		
 		if(x_vector>0.0f)x_vector/=friction;
 		if(x_vector<0.0f)x_vector/=friction;
 		if(y_vector>0.0)y_vector/=friction;

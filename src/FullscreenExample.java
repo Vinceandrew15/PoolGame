@@ -15,6 +15,9 @@ public class FullscreenExample {
 	
 	float angle_radians;
 	float angle_degrees;
+	float cue_vector_x;
+	float cue_vector_y;
+	float power=25;
 	
 	 /** time at last frame */
     long lastFrame;
@@ -81,7 +84,13 @@ public class FullscreenExample {
     	
     	standardTable.setCueballLocation(point_x, point_y); 
     	
-        if (Keyboard.isKeyDown(Keyboard.KEY_SPACE))eightball.addImpulse((float)Math.cos(angle_radians),(float)Math.sin(angle_radians));
+    	if(eightball.getIsMoving())standardTable.setGameState(1);
+    	if(!eightball.getIsMoving())standardTable.setGameState(0);
+    	
+    	cue_vector_x = (float)Math.cos(angle_radians);
+    	cue_vector_y = (float)Math.sin(angle_radians);
+    	
+        if (Keyboard.isKeyDown(Keyboard.KEY_SPACE) && !eightball.getIsMoving())eightball.addImpulse(cue_vector_x*power,cue_vector_y*power);
 
     	
         if (Keyboard.isKeyDown(Keyboard.KEY_UP))eightball.addImpulse(0f,0.3f);

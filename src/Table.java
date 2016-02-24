@@ -8,11 +8,13 @@ public class Table {
 	int border;
 	int pocket_radius;
 	float mouse_angle;
-	int hello;
+
 	int game_state;
 	
 	float cueball_x;
 	float cueball_y;
+	float cue_vector_x;
+	float cue_vector_y;
 	
 	
 	public Table(int newX, int newY, int newPlayableWidth,int newPlayableHeight,int newBorder, int newPocketRadius){
@@ -31,6 +33,12 @@ public class Table {
 		cueball_x = newX;
 		cueball_y = newY;
 	}
+	
+	public void setCueVectors(float newX, float newY){
+		cue_vector_x=newX;
+		cue_vector_y=newY;
+	}
+	
 	public void setGameState(int newGameState){
 		game_state = newGameState;
 	}
@@ -97,7 +105,7 @@ public class Table {
           drawEllipse((border*2)+(playable_width/2),(border*2)+playable_height,pocket_radius,pocket_radius,0f,0f,0f,0.0f);
           drawEllipse((border*2)+playable_width,(border*2)+playable_height,pocket_radius,pocket_radius,0f,0f,0f,0.0f);
           
-          rotateRect(mouse_angle,(int)cueball_x,(int)cueball_y,2,100,0.5f,0.2f,0.1f,0.0f);
+          if(game_state==0)rotateRect(mouse_angle,(int)cueball_x,(int)cueball_y,2,100,0.5f,0.2f,0.1f,0.0f);
 	}
 	
 	
