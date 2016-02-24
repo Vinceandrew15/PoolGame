@@ -27,6 +27,10 @@ public class Ball {
 		x_vector+=newX;
 		y_vector+=newY;
 	}
+	public int getRadius(){
+		return radius;
+	}
+	
 	public float getX(){
 		return x;
 	}
@@ -35,6 +39,28 @@ public class Ball {
 	}
 	public boolean getIsMoving(){
 		return is_moving;
+	}
+	public boolean isColliding(Ball newBall){
+		float xd = x - newBall.getX();
+		float yd = y - newBall.getY();
+		
+		float radius_sum = radius + newBall.getRadius();
+		float radius_sqr = radius_sum * radius_sum;
+		
+		float dist_sqr = (xd * xd) + (yd * yd);
+		
+		if(dist_sqr <= radius_sqr){
+			return true;
+		}else{
+			return false;
+		}
+		
+		
+		
+		
+	}
+	public void resolveCollision(Ball newBall){
+		
 	}
 	
 	public void drawEllipse(int newX, int newY, float xradius, float yradius, float r, float g, float b, float a )

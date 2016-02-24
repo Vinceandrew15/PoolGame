@@ -9,9 +9,9 @@ import org.lwjgl.input.Mouse;
   
 public class FullscreenExample {
 	
-	int hello;
 	int mouse_x;
 	int mouse_y;
+	boolean leftButtonDown;
 	
 	float angle_radians;
 	float angle_degrees;
@@ -75,6 +75,7 @@ public class FullscreenExample {
        
     	mouse_x = Mouse.getX(); // will return the X coordinate on the Display.
     	mouse_y = Mouse.getY(); // will return the Y coordinate on the Display.
+    	leftButtonDown = Mouse.isButtonDown(0);
         
     	float point_y = standardBall[0].getY();
     	float point_x = standardBall[0].getX();
@@ -95,7 +96,7 @@ public class FullscreenExample {
     	
     	standardTable.setCueVectors(cue_vector_x, cue_vector_y);
     	
-        if (Keyboard.isKeyDown(Keyboard.KEY_SPACE) && !standardBall[0].getIsMoving())standardBall[0].addImpulse(cue_vector_x*power,cue_vector_y*power);
+        if (leftButtonDown && !standardBall[0].getIsMoving())standardBall[0].addImpulse(cue_vector_x*power,cue_vector_y*power);
 
     	
         if (Keyboard.isKeyDown(Keyboard.KEY_UP))standardBall[0].addImpulse(0f,0.3f);
@@ -104,7 +105,18 @@ public class FullscreenExample {
         if (Keyboard.isKeyDown(Keyboard.KEY_RIGHT))standardBall[0].addImpulse(0.3f,0f);
 
 
-    
+        for (int i = 0; i <15; i++)  
+        {  
+            for (int j = i + 1; j < 15; j++)  
+            {  
+                if (standardBall[i].isColliding(standardBall[j]))  
+                {
+                	standardBall[i].resolveCollision(standardBall[j]);
+                }
+            }
+        }
+
+        
          
      
          
