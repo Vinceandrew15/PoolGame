@@ -127,6 +127,11 @@ public class FullscreenExample {
         
         standardBall[0] = new Ball(100,250,0,12);
         standardBall[1] = new Ball(700,250,1,12);
+        
+        for(int i=2; i<15; i++){
+        	standardBall[i] = new Ball(50+(i*25),300,2,12);
+        }
+        
         standardTable = new Table(0,0,800,400,25,15);
         
         
@@ -148,10 +153,12 @@ public class FullscreenExample {
             
             standardTable.draw();
             
-            standardBall[0].draw();
-            standardBall[0].update(delta);
-            standardBall[1].draw();
-            standardBall[1].update(delta);
+            for(int i=0; i<15; i++){
+            	standardBall[i].draw();
+                standardBall[i].update(delta);
+            }
+            
+            
            
             
             update(delta);

@@ -62,6 +62,9 @@ public class Ball {
 		if(ball_id==1){
 			drawEllipse((int)x,(int)y,radius,radius,0,0,0,0);
 		}
+		if(ball_id==2){
+			drawEllipse((int)x,(int)y,radius,radius,0.5f,0.5f,0,0);
+		}
 	}
 	public void update(int delta){
 		x+=x_vector;
