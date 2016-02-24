@@ -105,7 +105,8 @@ public class Table {
           drawEllipse((border*2)+(playable_width/2),(border*2)+playable_height,pocket_radius,pocket_radius,0f,0f,0f,0.0f);
           drawEllipse((border*2)+playable_width,(border*2)+playable_height,pocket_radius,pocket_radius,0f,0f,0f,0.0f);
           
-          if(game_state==0)rotateRect(mouse_angle,(int)cueball_x,(int)cueball_y,2,100,0.5f,0.2f,0.1f,0.0f);
+          if(game_state==0)
+        	  rotateRect(mouse_angle,(int)(cueball_x),(int)(cueball_y),2,100,0.5f,0.2f,0.1f,0.0f);
 	}
 	
 	

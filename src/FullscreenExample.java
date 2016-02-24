@@ -27,8 +27,10 @@ public class FullscreenExample {
     /** last fps time */
     long lastFPS;
     
-    Ball eightball;
+    Ball cueBall;
+    Ball eightBall;
     Table standardTable;
+    
     
     int game_state;
 	
@@ -75,28 +77,32 @@ public class FullscreenExample {
     	mouse_x = Mouse.getX(); // will return the X coordinate on the Display.
     	mouse_y = Mouse.getY(); // will return the Y coordinate on the Display.
         
-    	float point_y = eightball.getY();
-    	float point_x = eightball.getX();
+    	float point_y = cueBall.getY();
+    	float point_x = cueBall.getX();
     	
-    	angle_radians = find_angle(point_x,point_y,mouse_x,mouse_y);
+    	cue_vector_x = (float)Math.cos(angle_radians);
+    	cue_vector_y = (float)Math.sin(angle_radians);
+    	
+    	angle_radians = find_angle(point_x+cue_vector_x*10,point_y+cue_vector_y*10,mouse_x,mouse_y);
     	angle_degrees=(angle_radians*57.2957795f);
     	standardTable.setMouseAngle(angle_degrees+90);
     	
     	standardTable.setCueballLocation(point_x, point_y); 
     	
-    	if(eightball.getIsMoving())standardTable.setGameState(1);
-    	if(!eightball.getIsMoving())standardTable.setGameState(0);
+    	if(cueBall.getIsMoving())standardTable.setGameState(1);
+    	if(!cueBall.getIsMoving())standardTable.setGameState(0);
     	
-    	cue_vector_x = (float)Math.cos(angle_radians);
-    	cue_vector_y = (float)Math.sin(angle_radians);
     	
-        if (Keyboard.isKeyDown(Keyboard.KEY_SPACE) && !eightball.getIsMoving())eightball.addImpulse(cue_vector_x*power,cue_vector_y*power);
+    	
+    	standardTable.setCueVectors(cue_vector_x, cue_vector_y);
+    	
+        if (Keyboard.isKeyDown(Keyboard.KEY_SPACE) && !cueBall.getIsMoving())cueBall.addImpulse(cue_vector_x*power,cue_vector_y*power);
 
     	
-        if (Keyboard.isKeyDown(Keyboard.KEY_UP))eightball.addImpulse(0f,0.3f);
-        if (Keyboard.isKeyDown(Keyboard.KEY_DOWN))eightball.addImpulse(0f,-0.3f);
-        if (Keyboard.isKeyDown(Keyboard.KEY_LEFT))eightball.addImpulse(-0.3f,0f);
-        if (Keyboard.isKeyDown(Keyboard.KEY_RIGHT))eightball.addImpulse(0.3f,0f);
+        if (Keyboard.isKeyDown(Keyboard.KEY_UP))cueBall.addImpulse(0f,0.3f);
+        if (Keyboard.isKeyDown(Keyboard.KEY_DOWN))cueBall.addImpulse(0f,-0.3f);
+        if (Keyboard.isKeyDown(Keyboard.KEY_LEFT))cueBall.addImpulse(-0.3f,0f);
+        if (Keyboard.isKeyDown(Keyboard.KEY_RIGHT))cueBall.addImpulse(0.3f,0f);
 
 
     
@@ -120,7 +126,8 @@ public class FullscreenExample {
         
         lastFPS = getTime();
         
-        eightball = new Ball(300,200,0,12);
+        cueBall = new Ball(100,250,0,12);
+        eightBall = new Ball(700,250,1,12);
         standardTable = new Table(0,0,800,400,25,15);
         
         
@@ -142,8 +149,10 @@ public class FullscreenExample {
             
             standardTable.draw();
             
-            eightball.draw();
-            eightball.update(delta);
+            cueBall.draw();
+            cueBall.update(delta);
+            eightBall.draw();
+            eightBall.update(delta);
            
             
             update(delta);
