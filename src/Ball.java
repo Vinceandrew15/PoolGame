@@ -60,6 +60,25 @@ public class Ball {
 		
 	}
 	public void resolveCollision(Ball newBall){
+		float new_x_vector_1 = (x_vector*(radius - newBall.radius) + (2 * newBall.radius * newBall.x_vector))/ (radius + newBall.radius);
+		float new_y_vector_1 = (y_vector*(radius - newBall.radius) + (2 * newBall.radius * newBall.y_vector))/ (radius + newBall.radius);
+		
+		float new_x_vector_2 = (newBall.x_vector*(newBall.radius - radius) + (2 * radius * x_vector))/ (radius + newBall.radius);
+		float new_y_vector_2 = (newBall.y_vector*(newBall.radius - radius) + (2 * radius * y_vector))/ (radius + newBall.radius);
+		
+		x_vector = new_x_vector_1;
+		y_vector = new_y_vector_1;
+		
+		newBall.x_vector = new_x_vector_2;
+		newBall.y_vector = new_y_vector_2;
+		
+		x += new_x_vector_1;
+		y += new_y_vector_1;
+		
+		newBall.x += new_x_vector_2;
+		newBall.y += new_y_vector_2;
+		
+		
 		
 	}
 	

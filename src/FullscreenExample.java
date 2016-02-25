@@ -176,6 +176,7 @@ public class FullscreenExample {
             update(delta);
             
             Display.update();
+            
             Display.sync(60);
             
         }
