@@ -80,15 +80,15 @@ public class Ball {
 		float new_x_vector_2 = (newBall.x_vector*(newBall.radius - radius) + (2 * radius * x_vector))/ (radius + newBall.radius);
 		float new_y_vector_2 = (newBall.y_vector*(newBall.radius - radius) + (2 * radius * y_vector))/ (radius + newBall.radius);
 		
-		x_vector = new_x_vector_1;
-		y_vector = new_y_vector_1;
+		x_vector = (1*(((float)(Math.PI/2))+(float)Math.cos(angle_radians)*speed))/2;
+		y_vector = (1*(((float)(Math.PI/2))+(float)Math.sin(angle_radians)*speed))/2;
 		
 		newBall.x_vector = -1*((float)Math.cos(angle_radians)*speed);
 		newBall.y_vector = -1*((float)Math.sin(angle_radians)*speed);	
     	
 		
-		x += 1000;
-		y += 1000;
+		x += x_vector;
+		y += y_vector;
 		
 		newBall.x += new_x_vector_2;
 		newBall.y += new_y_vector_2;
