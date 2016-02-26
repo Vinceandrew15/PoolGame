@@ -59,7 +59,21 @@ public class Ball {
 		
 		
 	}
+	 public static float find_angle(float x_1, float y_1, float x_2, float y_2){
+	        float tan_1;
+	        float tan_2;
+
+	        tan_1=y_1-y_2;
+	        tan_2=x_1-x_2;
+
+	        return (float)Math.atan2(tan_1,tan_2);
+	    }
+	
 	public void resolveCollision(Ball newBall){
+		float angle_radians = find_angle(x,y,newBall.x,newBall.y);
+		
+		float speed = (x_vector+y_vector)/2;
+		
 		float new_x_vector_1 = (x_vector*(radius - newBall.radius) + (2 * newBall.radius * newBall.x_vector))/ (radius + newBall.radius);
 		float new_y_vector_1 = (y_vector*(radius - newBall.radius) + (2 * newBall.radius * newBall.y_vector))/ (radius + newBall.radius);
 		
@@ -69,11 +83,12 @@ public class Ball {
 		x_vector = new_x_vector_1;
 		y_vector = new_y_vector_1;
 		
-		newBall.x_vector = new_x_vector_2;
-		newBall.y_vector = new_y_vector_2;
+		newBall.x_vector = -1*((float)Math.cos(angle_radians)*speed);
+		newBall.y_vector = -1*((float)Math.sin(angle_radians)*speed);	
+    	
 		
-		x += new_x_vector_1;
-		y += new_y_vector_1;
+		x += 1000;
+		y += 1000;
 		
 		newBall.x += new_x_vector_2;
 		newBall.y += new_y_vector_2;
