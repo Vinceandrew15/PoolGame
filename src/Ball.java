@@ -72,7 +72,8 @@ public class Ball {
 	public void resolveCollision(Ball newBall){
 		float angle_radians = find_angle(x,y,newBall.x,newBall.y);
 		
-		float speed = (x_vector+y_vector)/2;
+		
+		float speed = (x_vector+y_vector)/4;
 		
 		float new_x_vector_1 = (x_vector*(radius - newBall.radius) + (2 * newBall.radius * newBall.x_vector))/ (radius + newBall.radius);
 		float new_y_vector_1 = (y_vector*(radius - newBall.radius) + (2 * newBall.radius * newBall.y_vector))/ (radius + newBall.radius);
@@ -80,8 +81,15 @@ public class Ball {
 		float new_x_vector_2 = (newBall.x_vector*(newBall.radius - radius) + (2 * radius * x_vector))/ (radius + newBall.radius);
 		float new_y_vector_2 = (newBall.y_vector*(newBall.radius - radius) + (2 * radius * y_vector))/ (radius + newBall.radius);
 		
-		x_vector = (1*(((float)(Math.PI/2))+(float)Math.cos(angle_radians)*speed))/2;
-		y_vector = (1*(((float)(Math.PI/2))+(float)Math.sin(angle_radians)*speed))/2;
+		int multiplier;
+		
+		if(y>=newBall.y)
+			multiplier = 1;
+		else 
+			multiplier = -1;
+		
+		x_vector = (multiplier*((float)Math.cos(angle_radians+((Math.PI/2)*multiplier))*speed));
+		y_vector = (multiplier*((float)Math.sin(angle_radians+((Math.PI/2)*multiplier))*speed));
 		
 		newBall.x_vector = -1*((float)Math.cos(angle_radians)*speed);
 		newBall.y_vector = -1*((float)Math.sin(angle_radians)*speed);	
@@ -92,6 +100,12 @@ public class Ball {
 		
 		newBall.x += new_x_vector_2;
 		newBall.y += new_y_vector_2;
+		
+		if(ball_id==0){
+			System.out.println(angle_radians);
+			System.out.println(x_vector);
+			System.out.println(y_vector);
+		}
 		
 		
 		

@@ -9,6 +9,8 @@ import org.lwjgl.input.Mouse;
   
 public class FullscreenExample {
 	
+	public static final int NUMBER_OF_BALLS = 2; // 0 indexed
+	
 	int mouse_x;
 	int mouse_y;
 	boolean leftButtonDown;
@@ -27,7 +29,7 @@ public class FullscreenExample {
     /** last fps time */
     long lastFPS;
     
-    Ball[] standardBall = new Ball[15];
+    Ball[] standardBall = new Ball[NUMBER_OF_BALLS];
     Table standardTable;
     
     
@@ -76,7 +78,7 @@ public class FullscreenExample {
     	mouse_x = Mouse.getX(); // will return the X coordinate on the Display.
     	mouse_y = Mouse.getY(); // will return the Y coordinate on the Display.
     	leftButtonDown = Mouse.isButtonDown(0);
-        
+    	
     	float point_y = standardBall[0].getY();
     	float point_x = standardBall[0].getX();
     	
@@ -105,9 +107,9 @@ public class FullscreenExample {
         if (Keyboard.isKeyDown(Keyboard.KEY_RIGHT))standardBall[0].addImpulse(0.3f,0f);
 
 
-        for (int i = 0; i <15; i++)  
+        for (int i = 0; i <NUMBER_OF_BALLS; i++)  
         {  
-            for (int j = i + 1; j < 15; j++)  
+            for (int j = i + 1; j < NUMBER_OF_BALLS; j++)  
             {  
                 if (standardBall[i].isColliding(standardBall[j]))  
                 {
@@ -137,8 +139,11 @@ public class FullscreenExample {
         
         lastFPS = getTime();
         
-        standardBall[0] = new Ball(50,250,0,12);
-        standardBall[1] = new Ball(600,250,1,12);
+        standardBall[0] = new Ball(300,150,0,12);
+        standardBall[1] = new Ball(290,250,1,12);
+        
+        standardBall[0].addImpulse(0,10);
+        /*
         standardBall[2] = new Ball(620,270,2,12);
         standardBall[3] = new Ball(640,290,2,12);
         standardBall[4] = new Ball(660,310,2,12);
@@ -151,12 +156,12 @@ public class FullscreenExample {
         standardBall[8] = new Ball(660,190,2,12);
         standardBall[9] = new Ball(680,170,2,12);
         
-        standardBall[0].addImpulse(30,0);
         
-        for(int i=10; i<15; i++){
+        
+        for(int i=10; i<NUMBER_OF_BALLS; i++){
         	standardBall[i] = new Ball(50+(i*25),300,2,12);
         }
-        
+        */
         standardTable = new Table(0,0,800,400,25,15);
         
         
@@ -178,7 +183,7 @@ public class FullscreenExample {
             
             standardTable.draw();
             
-            for(int i=0; i<15; i++){
+            for(int i=0; i<NUMBER_OF_BALLS; i++){
             	standardBall[i].draw();
                 standardBall[i].update(delta);
             }
