@@ -73,35 +73,55 @@ public class Ball {
 		float angle_radians = find_angle(x,y,newBall.x,newBall.y);
 		
 		
-		float speed = (x_vector+y_vector)/4;
+		float speed = (Math.abs(x_vector)+Math.abs(y_vector))/4;
+		System.out.println(x_vector);
+		System.out.println(y_vector);
+		System.out.println(speed);
 		
+		/*
+		 * 
+		 * 
+		 */
 		float new_x_vector_1 = (x_vector*(radius - newBall.radius) + (2 * newBall.radius * newBall.x_vector))/ (radius + newBall.radius);
 		float new_y_vector_1 = (y_vector*(radius - newBall.radius) + (2 * newBall.radius * newBall.y_vector))/ (radius + newBall.radius);
 		
 		float new_x_vector_2 = (newBall.x_vector*(newBall.radius - radius) + (2 * radius * x_vector))/ (radius + newBall.radius);
 		float new_y_vector_2 = (newBall.y_vector*(newBall.radius - radius) + (2 * radius * y_vector))/ (radius + newBall.radius);
 		
-		int multiplier;
+		int x_multiplier;
 		
-		if(y>=newBall.y)
-			multiplier = 1;
+		if(x<newBall.x)
+			x_multiplier = -1;
 		else 
-			multiplier = -1;
+			x_multiplier = 1;
 		
-		x_vector = (multiplier*((float)Math.cos(angle_radians+((Math.PI/2)*multiplier))*speed));
-		y_vector = (multiplier*((float)Math.sin(angle_radians+((Math.PI/2)*multiplier))*speed));
+		int y_multiplier;
 		
-		newBall.x_vector = -1*((float)Math.cos(angle_radians)*speed);
-		newBall.y_vector = -1*((float)Math.sin(angle_radians)*speed);	
-    	
+		if(y<newBall.y)
+			y_multiplier = 1;
+		else 
+			y_multiplier = -1;
+		
+		
+		x_vector = (y_multiplier*((float)Math.cos(angle_radians+((Math.PI/2)*x_multiplier))*speed));
+		y_vector = (y_multiplier*((float)Math.sin(angle_radians+((Math.PI/2)*x_multiplier))*speed));
+		
+		
+		
+		newBall.x_vector = 1*((float)Math.cos(angle_radians+((Math.PI/2)*-1))*speed);
+		newBall.y_vector = 1*((float)Math.sin(angle_radians+((Math.PI/2)*-1))*speed);
+		
+		
+		
+		
 		
 		x += x_vector;
 		y += y_vector;
 		
-		newBall.x += new_x_vector_2;
-		newBall.y += new_y_vector_2;
+		newBall.x += newBall.x_vector;
+		newBall.y += newBall.y_vector;
 		
-		if(ball_id==0){
+		if(ball_id==99){
 			System.out.println(angle_radians);
 			System.out.println(x_vector);
 			System.out.println(y_vector);
