@@ -9,7 +9,7 @@ import org.lwjgl.input.Mouse;
   
 public class FullscreenExample {
 	
-	public static final int NUMBER_OF_BALLS = 2; // 0 indexed
+	public static final int NUMBER_OF_BALLS = 15; // 0 indexed
 	
 	int mouse_x;
 	int mouse_y;
@@ -60,6 +60,10 @@ public class FullscreenExample {
      */
     public long getTime() {
         return (Sys.getTime() * 1000) / Sys.getTimerResolution();
+    }
+    float distance_to_object(int x_1, int y_1,int x_2,int y_2){
+        return (float)Math.sqrt((Math.pow(x_1-x_2,2))+(Math.pow(y_1-y_2,2)));
+
     }
     
     public static float find_angle(float x_1, float y_1, float x_2, float y_2){
@@ -139,11 +143,11 @@ public class FullscreenExample {
         
         lastFPS = getTime();
         
-        standardBall[0] = new Ball(300,350,0,12);
-        standardBall[1] = new Ball(300,150,1,12);
+        standardBall[0] = new Ball(100,250,0,12);
+        standardBall[1] = new Ball(600,250,1,12);
         
-        standardBall[0].addImpulse(0,-15);
-        /*
+        standardBall[0].addImpulse(0,0);
+        
         standardBall[2] = new Ball(620,270,2,12);
         standardBall[3] = new Ball(640,290,2,12);
         standardBall[4] = new Ball(660,310,2,12);
@@ -161,7 +165,7 @@ public class FullscreenExample {
         for(int i=10; i<NUMBER_OF_BALLS; i++){
         	standardBall[i] = new Ball(50+(i*25),300,2,12);
         }
-        */
+        
         standardTable = new Table(0,0,800,400,25,15);
         
         
