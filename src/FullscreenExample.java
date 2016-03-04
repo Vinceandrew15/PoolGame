@@ -140,7 +140,7 @@ public class FullscreenExample {
         lastFPS = getTime();
         
         standardBall[0] = new Ball(300,350,0,12);
-        standardBall[1] = new Ball(290,150,1,12);
+        standardBall[1] = new Ball(300,150,1,12);
         
         standardBall[0].addImpulse(0,-15);
         /*

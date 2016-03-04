@@ -89,28 +89,34 @@ public class Ball {
 		float new_y_vector_2 = (newBall.y_vector*(newBall.radius - radius) + (2 * radius * y_vector))/ (radius + newBall.radius);
 		
 		int x_multiplier;
+		if(x!=newBall.x && y!=newBall.y){
+			if(x<newBall.x)
+				x_multiplier = -1;
+			else 
+				x_multiplier = 1;
 		
-		if(x<newBall.x)
-			x_multiplier = -1;
-		else 
-			x_multiplier = 1;
+			int y_multiplier;
 		
-		int y_multiplier;
-		
-		if(y<newBall.y)
-			y_multiplier = 1;
-		else 
-			y_multiplier = -1;
-		
-		
-		x_vector = (y_multiplier*((float)Math.cos(angle_radians+((Math.PI/2)*x_multiplier))*speed));
-		y_vector = (y_multiplier*((float)Math.sin(angle_radians+((Math.PI/2)*x_multiplier))*speed));
+			if(y<newBall.y)
+				y_multiplier = 1;
+			else 
+				y_multiplier = -1;
 		
 		
+			x_vector = (y_multiplier*((float)Math.cos(angle_radians+((Math.PI/2)*x_multiplier))*speed));
+			y_vector = (y_multiplier*((float)Math.sin(angle_radians+((Math.PI/2)*x_multiplier))*speed));
+		}
+		if(x==newBall.x || y==newBall.y){
+			x_vector=0;
+			y_vector=0;
+			y_vector = 1*((float)Math.sin(angle_radians)*speed);
+			x_vector = 1*((float)Math.cos(angle_radians)*speed);
+		}
+		newBall.x_vector = -1*((float)Math.cos(angle_radians)*speed);
+		newBall.y_vector = -1*((float)Math.sin(angle_radians)*speed);
 		
-		newBall.x_vector = 1*((float)Math.cos(angle_radians+((Math.PI/2)*-1))*speed);
-		newBall.y_vector = 1*((float)Math.sin(angle_radians+((Math.PI/2)*-1))*speed);
-		
+		//newBall.x_vector = 1000;
+		//newBall.y_vector = 1000;
 		
 		
 		
