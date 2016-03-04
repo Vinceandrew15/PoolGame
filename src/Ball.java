@@ -107,16 +107,12 @@ public class Ball {
 			y_vector = (y_multiplier*((float)Math.sin(angle_radians+((Math.PI/2)*x_multiplier))*speed));
 		}
 		if(x==newBall.x || y==newBall.y){
-			x_vector=0;
-			y_vector=0;
 			y_vector = 1*((float)Math.sin(angle_radians)*speed);
 			x_vector = 1*((float)Math.cos(angle_radians)*speed);
 		}
 		newBall.x_vector = -1*((float)Math.cos(angle_radians)*speed);
 		newBall.y_vector = -1*((float)Math.sin(angle_radians)*speed);
-		
-		//newBall.x_vector = 1000;
-		//newBall.y_vector = 1000;
+	
 		
 		
 		
