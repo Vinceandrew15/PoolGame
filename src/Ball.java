@@ -73,15 +73,18 @@ public class Ball {
 		float angle_radians = find_angle(x,y,newBall.x,newBall.y);
 		
 		
-		float speed = (Math.abs(x_vector)+Math.abs(y_vector))/4;
+		float speed = 0.1f+(Math.abs(x_vector)+Math.abs(y_vector))/4;
 		System.out.println(x_vector);
 		System.out.println(y_vector);
 		System.out.println(speed);
 		
-		/*
-		 * 
-		 * 
-		 */
+		if(speed<0.2){
+			x_vector=(float)(Math.random()*2)-1;
+			y_vector=(float)(Math.random()*2)-1;
+			newBall.x_vector=(float)(Math.random()*2)-1;
+			newBall.y_vector=(float)(Math.random()*2)-1;
+		}
+		
 		float new_x_vector_1 = (x_vector*(radius - newBall.radius) + (2 * newBall.radius * newBall.x_vector))/ (radius + newBall.radius);
 		float new_y_vector_1 = (y_vector*(radius - newBall.radius) + (2 * newBall.radius * newBall.y_vector))/ (radius + newBall.radius);
 		
@@ -115,19 +118,13 @@ public class Ball {
 	
 		
 		
-		
-		
 		x += x_vector;
 		y += y_vector;
 		
 		newBall.x += newBall.x_vector;
 		newBall.y += newBall.y_vector;
 		
-		if(ball_id==99){
-			System.out.println(angle_radians);
-			System.out.println(x_vector);
-			System.out.println(y_vector);
-		}
+		
 		
 		
 		
