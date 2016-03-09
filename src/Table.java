@@ -16,6 +16,20 @@ public class Table {
 	float cue_vector_x;
 	float cue_vector_y;
 	
+	public int getPlayableWidth(){
+		return playable_width;
+	}
+	
+	public int getPlayableHeight(){
+		return playable_height;
+	}
+	public int getX(){
+		return x;
+	}
+	
+	public int getY(){
+		return y;
+	}
 	
 	public Table(int newX, int newY, int newPlayableWidth,int newPlayableHeight,int newBorder, int newPocketRadius){
 		playable_width = newPlayableWidth;
