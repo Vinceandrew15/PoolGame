@@ -9,7 +9,7 @@ public class Ball {
 	float x_vector=0f;
 	float y_vector=0f;
 	int ball_id;
-	float friction = 1.02f;
+	float friction = 1.015f;
 	int radius;
 	
 	boolean is_x_moving;
@@ -73,26 +73,26 @@ public class Ball {
 		float angle_radians = find_angle(x,y,newBall.x,newBall.y);
 		
 		
-		float speed = 0.1f+(Math.abs(x_vector)+Math.abs(y_vector))/4;
+		float speed = 0.2f+(Math.abs(x_vector)+Math.abs(y_vector))/4;
 		System.out.println(x_vector);
 		System.out.println(y_vector);
 		System.out.println(speed);
 		
-		if(speed<0.2){
+		if(speed<0.3){
 			if(x>newBall.x){
-				x_vector=0.2f;
-				newBall.x_vector=-0.2f;
+				x_vector+=0.2f;
+				newBall.x_vector+=-0.2f;
 			}else{
-				x_vector=-0.2f;
-				newBall.x_vector=0.2f;
+				x_vector+=-0.2f;
+				newBall.x_vector+=0.2f;
 			}
 	
 			if(y>newBall.y){
-				y_vector=0.2f;
-				newBall.y_vector=-0.2f;
+				y_vector+=0.2f;
+				newBall.y_vector+=-0.2f;
 			}else{
-				y_vector=-0.2f;
-				newBall.y_vector=0.2f;
+				y_vector+=-0.2f;
+				newBall.y_vector+=0.2f;
 			}
 		
 		}else{

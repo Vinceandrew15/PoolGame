@@ -9,7 +9,7 @@ import org.lwjgl.input.Mouse;
   
 public class FullscreenExample {
 	
-	public static final int NUMBER_OF_BALLS = 15; // 0 indexed
+	public static final int NUMBER_OF_BALLS = 16; // 0 indexed
 	
 	int mouse_x;
 	int mouse_y;
@@ -144,7 +144,7 @@ public class FullscreenExample {
         lastFPS = getTime();
         
         standardBall[0] = new Ball(100,250,0,12);
-        standardBall[1] = new Ball(600,250,1,12);
+        standardBall[1] = new Ball(600,250,2,12);
         
         standardBall[0].addImpulse(0,0);
         
@@ -160,11 +160,14 @@ public class FullscreenExample {
         standardBall[8] = new Ball(660,190,2,12);
         standardBall[9] = new Ball(680,170,2,12);
         
+        standardBall[10] = new Ball(640,250,1,12);
+        standardBall[11] = new Ball(660,230,2,12);
+        standardBall[12] = new Ball(660,270,2,12);
+        standardBall[13] = new Ball(680,290,2,12);
+        standardBall[14] = new Ball(680,210,2,12);
+        standardBall[15] = new Ball(680,250,2,12);
+
         
-        
-        for(int i=10; i<NUMBER_OF_BALLS; i++){
-        	standardBall[i] = new Ball(50+(i*25),300,2,12);
-        }
         
         standardTable = new Table(0,0,800,400,25,15);
         
