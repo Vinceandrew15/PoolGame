@@ -121,16 +121,6 @@ public class FullscreenExample {
                 }
             }
         }
-        for (int i = 0; i <NUMBER_OF_BALLS; i++)  
-        {  
-            for (int j = i + 1; j < NUMBER_OF_BALLS; j++)  
-            {  
-                if (standardBall[i].isColliding(standardBall[j]))  
-                {
-                	standardBall[i].resolveCollision(standardBall[j]);
-                }
-            }
-        }
 
         
          

@@ -79,17 +79,25 @@ public class Ball {
 		System.out.println(speed);
 		
 		if(speed<0.2){
-			x_vector=(float)(Math.random()*2)-1;
-			y_vector=(float)(Math.random()*2)-1;
-			newBall.x_vector=(float)(Math.random()*2)-1;
-			newBall.y_vector=(float)(Math.random()*2)-1;
-		}
+			if(x>newBall.x){
+				x_vector=0.2f;
+				newBall.x_vector=-0.2f;
+			}else{
+				x_vector=-0.2f;
+				newBall.x_vector=0.2f;
+			}
+	
+			if(y>newBall.y){
+				y_vector=0.2f;
+				newBall.y_vector=-0.2f;
+			}else{
+				y_vector=-0.2f;
+				newBall.y_vector=0.2f;
+			}
 		
-		float new_x_vector_1 = (x_vector*(radius - newBall.radius) + (2 * newBall.radius * newBall.x_vector))/ (radius + newBall.radius);
-		float new_y_vector_1 = (y_vector*(radius - newBall.radius) + (2 * newBall.radius * newBall.y_vector))/ (radius + newBall.radius);
+		}else{
 		
-		float new_x_vector_2 = (newBall.x_vector*(newBall.radius - radius) + (2 * radius * x_vector))/ (radius + newBall.radius);
-		float new_y_vector_2 = (newBall.y_vector*(newBall.radius - radius) + (2 * radius * y_vector))/ (radius + newBall.radius);
+		
 		
 		int x_multiplier;
 		if(x!=newBall.x && y!=newBall.y){
@@ -116,7 +124,7 @@ public class Ball {
 		newBall.x_vector = -1*((float)Math.cos(angle_radians)*speed);
 		newBall.y_vector = -1*((float)Math.sin(angle_radians)*speed);
 	
-		
+		}
 		
 		x += x_vector;
 		y += y_vector;
