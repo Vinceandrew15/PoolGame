@@ -2,6 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="res/jbox2d.jar"/>
 	<classpathentry kind="lib" path="res/lwjgl_util.jar"/>
 	<classpathentry kind="lib" path="res/lwjgl.jar">
@@ -9,5 +10,13 @@
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="3D_JavaGame/res/native/linux"/>
 		</attributes>
 	</classpathentry>
+=======
+	<classpathentry kind="lib" path="C:/Libraries/lwjgl-2.9.3/jar/lwjgl.jar">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="C:/Libraries/lwjgl-2.9.3/native/windows"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Libraries/lwjgl-2.9.3/jar/lwjgl_util.jar"/>
+>>>>>>> 1ffe5d8f85d85ebd4ee1379a89521b6d54920ba6
 	<classpathentry kind="output" path="bin"/>
 </classpath>
