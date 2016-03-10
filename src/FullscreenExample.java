@@ -163,7 +163,7 @@ public class FullscreenExample {
 		    // Dynamic Body
 		    BodyDef bodyDef = new BodyDef();
 		    bodyDef.type = BodyType.DYNAMIC;
-		    bodyDef.position.set(100, 450);
+		    bodyDef.position.set(0, 0);
 		    Body body = world.createBody(bodyDef);
 		    PolygonShape dynamicBox = new PolygonShape();
 		    dynamicBox.setAsBox(12, 12);
@@ -177,9 +177,11 @@ public class FullscreenExample {
 		    float timeStep = 1.0f/60.0f;
 		    int velocityIterations = 6;
 		    int positionIterations = 2;
-		    body.setLinearVelocity(new Vec2(2500.0f, -2500.0f));
+		    //body.setLinearVelocity(new Vec2(2500.0f, -2500.0f));
 		    //body.setLinearDamping(1f);
-		    
+		    Vec2 f = body.getWorldVector(new Vec2(0.0f, -30.0f));
+		    Vec2 p = body.getWorldPoint(body.getLocalCenter().add(new Vec2(-.2f, 0f)));
+		    body.applyForce(new Vec2(-200,-200),new Vec2(-200,200));
 		    
     	
         try {
@@ -250,8 +252,8 @@ public class FullscreenExample {
             	standardBall[i].draw();
                 standardBall[i].update(delta);
             }
-            standardBall[0].setX(position.x);  
-            standardBall[0].setY(position.y);
+            standardBall[0].setX((position.x*20)+450);  
+            standardBall[0].setY((position.y*20)+250);
             
            
             
