@@ -23,6 +23,7 @@ import org.lwjgl.input.Mouse;
   
 public class FullscreenExample {
 	
+	
 	public static final int NUMBER_OF_BALLS = 16; // 0 indexed
 	
 	int mouse_x;
@@ -90,43 +91,7 @@ public class FullscreenExample {
         return (float)Math.atan2(tan_1,tan_2);
     }
     
-    public void box2d_update(){
-    	 world.step(timeStep, velocityIterations, positionIterations);
-	      Vec2 position = body.getPosition();
-	      float angle = body.getAngle();
-	      System.out.printf("%4.2f %4.2f %4.2f\n", position.x, position.y, angle);
-    }
-    
-    public void box2d_setup(  // Static Body
-	    Vec2  gravity = new Vec2(0,-10);
-	    World world = new World(gravity);
-	    BodyDef groundBodyDef = new BodyDef();
-	    groundBodyDef.position.set(0, -10);
-	    Body groundBody = world.createBody(groundBodyDef);
-	    PolygonShape groundBox = new PolygonShape();
-	    groundBox.setAsBox(50, 10);
-	    groundBody.createFixture(groundBox, 0);
-
-	    // Dynamic Body
-	    BodyDef bodyDef = new BodyDef();
-	    bodyDef.type = BodyType.DYNAMIC;
-	    bodyDef.position.set(0, 4);
-	    Body body = world.createBody(bodyDef);
-	    PolygonShape dynamicBox = new PolygonShape();
-	    dynamicBox.setAsBox(1, 1);
-	    FixtureDef fixtureDef = new FixtureDef();
-	    fixtureDef.shape = dynamicBox;
-	    fixtureDef.density = 1;
-	    fixtureDef.friction = 0.3f;
-	    body.createFixture(fixtureDef);
-
-	    // Setup world
-	    float timeStep = 1.0f/60.0f;
-	    int velocityIterations = 6;
-	    int positionIterations = 2;
-
-	   )
-	    
+   
     
     public void update(int delta) {
        
@@ -184,6 +149,36 @@ public class FullscreenExample {
 	
     public void start() {
     	
+    	  Vec2  gravity = new Vec2(0,-10);
+		    World world = new World(gravity);
+		    BodyDef groundBodyDef = new BodyDef();
+		    groundBodyDef.position.set(0, -10);
+		    Body groundBody = world.createBody(groundBodyDef);
+		    PolygonShape groundBox = new PolygonShape();
+		    groundBox.setAsBox(50, 10);
+		    groundBody.createFixture(groundBox, 0);
+
+		    // Dynamic Body
+		    BodyDef bodyDef = new BodyDef();
+		    bodyDef.type = BodyType.DYNAMIC;
+		    bodyDef.position.set(0, 4);
+		    Body body = world.createBody(bodyDef);
+		    PolygonShape dynamicBox = new PolygonShape();
+		    dynamicBox.setAsBox(1, 1);
+		    FixtureDef fixtureDef = new FixtureDef();
+		    fixtureDef.shape = dynamicBox;
+		    fixtureDef.density = 1;
+		    fixtureDef.friction = 0.3f;
+		    body.createFixture(fixtureDef);
+
+		    // Setup world
+		    float timeStep = 1.0f/60.0f;
+		    int velocityIterations = 6;
+		    int positionIterations = 2;
+		    for (int i = 0; i < 60; ++i) {
+		       
+		    }
+    	
         try {
         Display.setDisplayMode(new DisplayMode(900,500));
         Display.create();
@@ -236,6 +231,10 @@ public class FullscreenExample {
         
         while (!Display.isCloseRequested()) {
         	int delta = getDelta();
+        	 world.step(timeStep, velocityIterations, positionIterations);
+		     Vec2 position = body.getPosition();
+		     float angle = body.getAngle();
+		     System.out.printf("%4.2f %4.2f %4.2f\n", position.x, position.y, angle);
         	
             // Clear the screen and depth buffer
             GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);  
@@ -261,6 +260,7 @@ public class FullscreenExample {
         }
         Display.destroy();
         
+        
     }
    
  
@@ -271,6 +271,11 @@ public class FullscreenExample {
     
   
     public static void main(String[] argv) {
+    	
+ // Static Body
+    			  
+    			   
+    	
         FullscreenExample quadExample = new FullscreenExample();
         quadExample.start();
     }
