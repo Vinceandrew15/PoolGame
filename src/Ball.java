@@ -60,24 +60,21 @@ public class Ball {
 		
 	}
 	 public static float find_angle(float x_1, float y_1, float x_2, float y_2){
-	        float tan_1;
-	        float tan_2;
+	    float tan_1;
+	    float tan_2;
 
-	        tan_1=y_1-y_2;
-	        tan_2=x_1-x_2;
+	    tan_1=y_1-y_2;
+	    tan_2=x_1-x_2;
 
-	        return (float)Math.atan2(tan_1,tan_2);
-	    }
+	    return (float)Math.atan2(tan_1,tan_2);
+	}
 	
 	public void resolveCollision(Ball newBall){
 		float angle_radians = find_angle(x,y,newBall.x,newBall.y);
 		
 		
 		float speed = 0.2f+(Math.abs(x_vector)+Math.abs(y_vector))/4;
-		System.out.println(x_vector);
-		System.out.println(y_vector);
-		System.out.println(speed);
-		
+	
 		if(speed<0.3){
 			if(x>newBall.x){
 				x_vector+=0.2f;
@@ -99,25 +96,48 @@ public class Ball {
 		
 		
 		
-		int x_multiplier;
-		if(x!=newBall.x && y!=newBall.y){
-			if(x<newBall.x)
-				x_multiplier = -1;
-			else 
-				x_multiplier = 1;
 		
-			int y_multiplier;
-		
-			if(y<newBall.y)
-				y_multiplier = 1;
-			else 
+		if(x!=newBall.x && y!=newBall.y && Math.abs(x_vector)!=Math.abs(y_vector)){
+			int y_multiplier = 0;
+			int x_multiplier = 0;
+			
+
+			if(y<newBall.y && x<newBall.x && Math.abs(x_vector)>Math.abs(y_vector)){
 				y_multiplier = -1;
+				x_multiplier = -1;
+			}
+			if(y<newBall.y && x<newBall.x && Math.abs(x_vector)<Math.abs(y_vector)){
+				y_multiplier = -1;
+				x_multiplier = 1;
+			}
+
+			
+			if(y<newBall.y && x>newBall.x){
+				y_multiplier = -1;
+				x_multiplier = 1;
+			}
+			if(y>newBall.y && x>newBall.x){
+				y_multiplier = 1;
+				x_multiplier = 1;
+			}
+			
+			
+			
+			if(y>newBall.y && x<newBall.x && Math.abs(y_vector)>Math.abs(x_vector)){
+				y_multiplier = 1;
+				x_multiplier = 1;
+			}
+			if(y>newBall.y && x<newBall.x && Math.abs(y_vector)<Math.abs(x_vector)){
+				y_multiplier = 1;
+				x_multiplier = -1;
+			}
+
 		
 		
 			x_vector = (y_multiplier*((float)Math.cos(angle_radians+((Math.PI/2)*x_multiplier))*speed));
 			y_vector = (y_multiplier*((float)Math.sin(angle_radians+((Math.PI/2)*x_multiplier))*speed));
 		}
-		if(x==newBall.x || y==newBall.y){
+		if(x==newBall.x || y==newBall.y ||  Math.abs(x_vector)==Math.abs(y_vector)){
 			y_vector = 1*((float)Math.sin(angle_radians)*speed);
 			x_vector = 1*((float)Math.cos(angle_radians)*speed);
 		}
