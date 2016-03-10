@@ -2,11 +2,12 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="/media/danwardvs/Acer/Libraries/lwjgl-2.9.3/jar/lwjgl.jar">
+	<classpathentry kind="lib" path="res/jbox2d.jar"/>
+	<classpathentry kind="lib" path="res/lwjgl_util.jar"/>
+	<classpathentry kind="lib" path="res/lwjgl.jar">
 		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="/media/danwardvs/Acer/Libraries/lwjgl-2.9.3/native/linux"/>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="3D_JavaGame/res/native/linux"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/media/danwardvs/Acer/Libraries/lwjgl-2.9.3/jar/lwjgl_util.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
