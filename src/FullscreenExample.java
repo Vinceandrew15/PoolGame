@@ -82,6 +82,7 @@ public class FullscreenExample {
 
         return (float)Math.atan2(tan_1,tan_2);
     }
+    /*
     public void box2d_update(){
     	 world.step(timeStep, velocityIterations, positionIterations);
 	      Vec2 position = body.getPosition();
@@ -121,6 +122,7 @@ public class FullscreenExample {
 	    for (int i = 0; i < 60; ++i) {
 	       
 	    })
+	    */
     
     public void update(int delta) {
        
