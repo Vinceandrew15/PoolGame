@@ -1,10 +1,17 @@
 
+import org.jbox2d.common.IViewportTransform;
+import org.jbox2d.common.Mat22;
+import org.jbox2d.common.OBBViewportTransform;
 import org.jbox2d.common.Vec2;
-import org.jbox2d.dynamics.Body;
-import org.jbox2d.dynamics.BodyDef;
-import org.jbox2d.dynamics.BodyType;
-import org.jbox2d.dynamics.FixtureDef;
+import org.jbox2d.callbacks.DebugDraw;
+import org.jbox2d.collision.AABB;  
+import org.jbox2d.common.Vec2;  
+import org.jbox2d.dynamics.Body;  
+import org.jbox2d.dynamics.BodyDef;  
 import org.jbox2d.dynamics.World;
+import org.jbox2d.collision.shapes.PolygonShape; 
+import org.jbox2d.dynamics.FixtureDef;
+import org.jbox2d.dynamics.BodyType;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
@@ -82,7 +89,7 @@ public class FullscreenExample {
 
         return (float)Math.atan2(tan_1,tan_2);
     }
-    /*
+    
     public void box2d_update(){
     	 world.step(timeStep, velocityIterations, positionIterations);
 	      Vec2 position = body.getPosition();
@@ -118,11 +125,8 @@ public class FullscreenExample {
 	    int velocityIterations = 6;
 	    int positionIterations = 2;
 
-	    // Run loop
-	    for (int i = 0; i < 60; ++i) {
-	       
-	    })
-	    */
+	   )
+	    
     
     public void update(int delta) {
        
