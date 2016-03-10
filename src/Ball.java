@@ -22,6 +22,13 @@ public class Ball {
 		ball_id = new_ball_id;
 		radius = newRadius;
 	}
+	public void setX(float newX){
+		x = newX;
+	}
+	
+	public void setY(float newY){
+		y = newY;
+	}
 	
 	public void addImpulse(float newX, float newY){
 		x_vector+=newX;

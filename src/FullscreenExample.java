@@ -94,6 +94,7 @@ public class FullscreenExample {
    
     
     public void update(int delta) {
+    	
        
     	mouse_x = Mouse.getX(); // will return the X coordinate on the Display.
     	mouse_y = Mouse.getY(); // will return the Y coordinate on the Display.
@@ -125,6 +126,7 @@ public class FullscreenExample {
         if (Keyboard.isKeyDown(Keyboard.KEY_DOWN))standardBall[0].addImpulse(0f,-0.3f);
         if (Keyboard.isKeyDown(Keyboard.KEY_LEFT))standardBall[0].addImpulse(-0.3f,0f);
         if (Keyboard.isKeyDown(Keyboard.KEY_RIGHT))standardBall[0].addImpulse(0.3f,0f);
+        
 
 
         for (int i = 0; i <NUMBER_OF_BALLS; i++)  
@@ -149,25 +151,25 @@ public class FullscreenExample {
 	
     public void start() {
     	
-    	  Vec2  gravity = new Vec2(0,-10);
+    	  Vec2  gravity = new Vec2(0,0);
 		    World world = new World(gravity);
 		    BodyDef groundBodyDef = new BodyDef();
-		    groundBodyDef.position.set(0, -10);
+		    groundBodyDef.position.set(0,50);
 		    Body groundBody = world.createBody(groundBodyDef);
 		    PolygonShape groundBox = new PolygonShape();
-		    groundBox.setAsBox(50, 10);
+		    groundBox.setAsBox(800, 0);
 		    groundBody.createFixture(groundBox, 0);
 
 		    // Dynamic Body
 		    BodyDef bodyDef = new BodyDef();
 		    bodyDef.type = BodyType.DYNAMIC;
-		    bodyDef.position.set(0, 4);
+		    bodyDef.position.set(100, 450);
 		    Body body = world.createBody(bodyDef);
 		    PolygonShape dynamicBox = new PolygonShape();
-		    dynamicBox.setAsBox(1, 1);
+		    dynamicBox.setAsBox(12, 12);
 		    FixtureDef fixtureDef = new FixtureDef();
 		    fixtureDef.shape = dynamicBox;
-		    fixtureDef.density = 1;
+		    fixtureDef.density = 1f;
 		    fixtureDef.friction = 0.3f;
 		    body.createFixture(fixtureDef);
 
@@ -175,9 +177,10 @@ public class FullscreenExample {
 		    float timeStep = 1.0f/60.0f;
 		    int velocityIterations = 6;
 		    int positionIterations = 2;
-		    for (int i = 0; i < 60; ++i) {
-		       
-		    }
+		    body.setLinearVelocity(new Vec2(2500.0f, -2500.0f));
+		    //body.setLinearDamping(1f);
+		    
+		    
     	
         try {
         Display.setDisplayMode(new DisplayMode(900,500));
@@ -231,10 +234,10 @@ public class FullscreenExample {
         
         while (!Display.isCloseRequested()) {
         	int delta = getDelta();
-        	 world.step(timeStep, velocityIterations, positionIterations);
+        	world.step(timeStep, velocityIterations, positionIterations);
 		     Vec2 position = body.getPosition();
 		     float angle = body.getAngle();
-		     System.out.printf("%4.2f %4.2f %4.2f\n", position.x, position.y, angle);
+		     //System.out.printf("%4.2f %4.2f %4.2f\n", position.x, position.y, angle);
         	
             // Clear the screen and depth buffer
             GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);  
@@ -247,11 +250,13 @@ public class FullscreenExample {
             	standardBall[i].draw();
                 standardBall[i].update(delta);
             }
-            
+            standardBall[0].setX(position.x);  
+            standardBall[0].setY(position.y);
             
            
             
             update(delta);
+            
             
             Display.update();
             
