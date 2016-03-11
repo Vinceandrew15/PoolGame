@@ -26,6 +26,11 @@ public class FullscreenExample {
 	
 	public static final int NUMBER_OF_BALLS = 16; // 0 indexed
 	
+	int screen_width = 900;
+	int screen_height = 500;
+	int offset_x = screen_width/2;
+	int offset_y = screen_height/2;
+	
 	int mouse_x;
 	int mouse_y;
 	boolean leftButtonDown;
@@ -154,10 +159,10 @@ public class FullscreenExample {
     	  Vec2  gravity = new Vec2(0,0);
 		    World world = new World(gravity);
 		    BodyDef groundBodyDef = new BodyDef();
-		    groundBodyDef.position.set(0,50);
+		    groundBodyDef.position.set(0,-25);
 		    Body groundBody = world.createBody(groundBodyDef);
 		    PolygonShape groundBox = new PolygonShape();
-		    groundBox.setAsBox(800, 0);
+		    groundBox.setAsBox(900, 10);
 		    groundBody.createFixture(groundBox, 0);
 
 		    // Dynamic Body
@@ -177,15 +182,15 @@ public class FullscreenExample {
 		    float timeStep = 1.0f/60.0f;
 		    int velocityIterations = 6;
 		    int positionIterations = 2;
-		    //body.setLinearVelocity(new Vec2(2500.0f, -2500.0f));
-		    //body.setLinearDamping(1f);
+		    body.setLinearVelocity(new Vec2(15.0f, -15.0f));
+		    body.setLinearDamping(2f);
 		    Vec2 f = body.getWorldVector(new Vec2(0.0f, -30.0f));
 		    Vec2 p = body.getWorldPoint(body.getLocalCenter().add(new Vec2(-.2f, 0f)));
-		    body.applyForce(new Vec2(-200,-200),new Vec2(-200,200));
+		    //body.applyForce(new Vec2(-200,-200),new Vec2(-200,200));
 		    
     	
         try {
-        Display.setDisplayMode(new DisplayMode(900,500));
+        Display.setDisplayMode(new DisplayMode(screen_width,screen_height));
         Display.create();
     } catch (LWJGLException e) {
         e.printStackTrace();
@@ -252,8 +257,8 @@ public class FullscreenExample {
             	standardBall[i].draw();
                 standardBall[i].update(delta);
             }
-            standardBall[0].setX((position.x*20)+450);  
-            standardBall[0].setY((position.y*20)+250);
+            standardBall[0].setX((position.x*20)+offset_x);  
+            standardBall[0].setY((position.y*20)+offset_y);
             
            
             
